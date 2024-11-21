@@ -1,0 +1,47 @@
+.main {
+    height: calc(100vh - 55.97px);
+    overflow: hidden;
+  }
+  .question {
+    display: grid;
+  }
+  .question .choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin: 1%;
+  }
+  .question .answer {
+    display: grid;
+    align-items: center;
+    margin: 4%;
+    /* width: 50%; */
+  }
+  @keyframes correct {
+    25% {
+      background-color: green;
+      border-color: green;
+      color: #fff;
+    }
+  }
+
+  @keyframes incorrect {
+    25% {
+      background-color: rgb(255, 0, 0);
+      border-color: red;
+      color: #fff;
+    }
+  }
+  .correct {
+    animation-name: correct;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+  }
+  .incorrect {
+    animation-name: incorrect;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+  }
+  .done {
+    display: none;
+  }

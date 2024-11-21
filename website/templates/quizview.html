@@ -1,0 +1,20 @@
+{%extends 'layout.html'%} {%block title%} Quiz {%endblock%} {%block body%}
+<h1>Chose Quiz Type</h1>
+<div class="container">
+  <form action="/quiz/me" method="post">
+    <select class="form-select mt-4" name="subject" id="subject">
+      <option value="all">All</option>
+      {%for subject in subjects%}
+      <option value="{{subject.name}}">{{subject.name}}</option>
+      {%endfor%}
+    </select>
+    <select class="form-select mt-4" name="quiztype" id="quiztype">
+      <option value="all">All</option>
+      <option value="random">Random</option>
+      <option value="unsolved">Unsolved</option>
+    </select>
+    <input class="btn btn-primary mt-4" type="submit" value="Start Quiz" />
+  </form>
+</div>
+
+{%endblock%}

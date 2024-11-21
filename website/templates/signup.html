@@ -1,0 +1,20 @@
+{%extends 'layout.html'%} {%block title%}SIGN UP{%endblock%} {%block body%}
+<h1 class="text-center mt-3">Sign up</h1>
+<form class="container" action="/signup" method="post">
+  <label class="form-label" for="email">Email:</label>
+  <input class="form-control" type="text" name="email" id="email" />
+  <label class="form-label" for="username">Username:</label>
+  <input class="form-control" type="text" name="username" id="username" />
+  <label class="form-label" for="password">Password:</label>
+  <input class="form-control" type="password" name="password" id="password" />
+  <label class="form-label" for="passwordconfirm">Confirm password:</label>
+  <input
+    class="form-control"
+    type="password"
+    name="confirmpassword"
+    id="passwordconfirm"
+  />
+  <input class="btn btn-primary mt-3" type="submit" value="Sign up" />
+</form>
+<a class="ms-5" href="/login">Already Have An Account?</a>
+{%endblock%}

@@ -1,0 +1,83 @@
+{%extends 'layout.html'%} {%block title%} Create Question {%endblock%} {%block
+body%}
+<h1 class="text-center mt-4">Create Question</h1>
+<div class="container">
+  <form action="/question/create" method="post" enctype="multipart/form-data">
+    <select name="questiontype" class="form-select">
+      <option value="TF">True Or False Question</option>
+      <option value="MCQ">Multipule Choice Questions</option>
+      <option value="SQ">Single Choice Questions</option>
+    </select>
+    <label for="subject">Subject: </label>
+    <select class="form-select" name="subject" id="subject">
+      {%for subject in subjects%}
+      <option value="{{subject.name}}">{{subject.name}}</option>
+      {%endfor%}
+    </select>
+    <label for="question">question: </label>
+    <input class="form-control" type="text" name="question" id="question" />
+    <div class="MCQ">
+      <input
+        class="form-control mt-2"
+        type="text"
+        name="choice1"
+        id="choices"
+        placeholder="Choice1: "
+      />
+      <input
+        class="form-control mt-2"
+        type="text"
+        name="choice2"
+        id="choices"
+        placeholder="Choice2: "
+      />
+      <input
+        class="form-control mt-2"
+        type="text"
+        name="choice3"
+        id="choices"
+        placeholder="Choice3: "
+      />
+      <input
+        class="form-control mt-2"
+        type="text"
+        name="choice4"
+        id="choices"
+        placeholder="Choice4: "
+      />
+      <label for="correct">Correct Answer: </label>
+
+      <select class="form-select" name="correct" id="correct">
+        <option value="choice1">Choice1</option>
+        <option value="choice2">Choice2</option>
+        <option value="choice3">Choice3</option>
+        <option value="choice4">Choice4</option>
+      </select>
+    </div>
+    <div class="TF">
+      <label for="true">True: </label>
+      <input
+        class="form-switch"
+        type="radio"
+        value="true"
+        name="radio"
+        id="true"
+      />
+      <label for="false">False: </label>
+      <input
+        class="form-switch"
+        type="radio"
+        value="false"
+        name="radio"
+        id="false"
+      />
+    </div>
+    <div class="SQ">
+      <label for="answer">Answer: </label>
+      <input class="form-control" type="text" name="answer" id="answer" />
+    </div>
+    <input class="btn btn-success mt-3" type="submit" value="Create Question" />
+  </form>
+</div>
+<script src="{{url_for('static',filename='js/createquestion.js')}}"></script>
+{%endblock%}

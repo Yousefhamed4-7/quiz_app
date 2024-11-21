@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"
+      >{{session['username'] if session['user_id'] else 'Guest'}}</a
+    >
+    <button
+      class="navbar-toggler"
+      data-bs-target="#navbar"
+      data-bs-toggle="collapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      {% if session['user_id']%}
+      <ul class="navbar-nav w-100">
+        <li class="nav-item">
+          <a href="/" class="nav-link {{geturl('/','active')}}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="/question/create"
+            class="nav-link {{geturl('question/create','active')}}"
+            >Create Question</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href="/subject/create"
+            class="nav-link {{geturl('subject/create','active')}}"
+            >Create Subject</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="/quiz" class="nav-link {{geturl('quiz','active')}}"
+            >Quiz Me</a
+          >
+        </li>
+        <li class="nav-item ms-lg-auto">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+      {%else%}
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="/signup" class="nav-link {{geturl('signup','active')}}"
+            >Sign up</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="/login" class="nav-link {{geturl('login','active')}}"
+            >Login</a
+          >
+        </li>
+      </ul>
+      {%endif%}
+    </div>
+  </div>
+</nav>

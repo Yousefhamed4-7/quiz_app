@@ -1,0 +1,23 @@
+{%extends 'layout.html'%} {%block title%} {%endblock%} {%block body%}
+<div class="container text-center mt-2">
+  <h1>{{question.content}}</h1>
+  <ul class="list-unstyled d-flex flex-column">
+    {%for choice in choices%} {%if choice.correct == 1%}
+    <li correct="1">{{choice.text}}</li>
+    {%else%}
+
+    <li>{{choice.text}}</li>
+    {%endif%} {%endfor%}
+    <div class="answer text-success" style="overflow: hidden">
+      <span></span>
+    </div>
+    <button class="btn btn-primary">Show Answer</button>
+  </ul>
+</div>
+<form action="/question/delete" method="post">
+  <input type="hidden" name="question_id" value="{{question.id}}" />
+  <input class="btn btn-outline-danger" type="submit" value="Delete" />
+</form>
+
+<script src="{{url_for('static',filename='js/question_choices.js')}}"></script>
+{%endblock%}

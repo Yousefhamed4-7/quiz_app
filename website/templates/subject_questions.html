@@ -1,0 +1,38 @@
+{%extends 'layout.html'%} {%block title%} {{subject_name}}{%endblock%} {%block
+body%} {% if questions %}
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <h1>{{subject_name}} Questions</h1>
+  </div>
+  <select class="form-select w-25" name="type" id="type">
+    <option selected value="all">all</option>
+    <option value="unsolved">Unsolved</option>
+    <option value="solved">Solved</option>
+  </select>
+</div>
+<div class="container">
+  <div class="row g-3">
+    {%for question in questions%}
+    <div class="card text-center p-4" solved="{{question.Solved}}">
+      <h1 class="card-title">{{question.content}}</h1>
+      <div class="card-link">
+        <a href="/question/choices/{{question.id}}">View Question</a>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+{%else%}
+<h1>Sorrry No Questions Found For {{subject_name}}</h1>
+{%endif%}
+<form action="{{url_for('view.delete_subject')}}" method="post">
+  <input type="hidden" name="subject_name" value="{{subject_name}}" />
+  <input
+    class="btn btn-outline-danger mt-3"
+    type="submit"
+    value="Delete Subject"
+  />
+</form>
+<script src="{{url_for('static',filename='js/subject_questions.js')}}"></script>
+
+{%endblock%}

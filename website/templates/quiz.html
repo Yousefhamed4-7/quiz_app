@@ -1,0 +1,59 @@
+{%extends 'layout.html'%} {%block title%} Quiz {%endblock%} {%block body%}
+{%block css%} <link rel="stylesheet" href="{{url_for('static',filename='css/quiz.css')}}">{%endblock%}
+<div class="main container-fluid">
+  {%if questions%}
+  {%for question in questions%}
+      <div class="w-100 h-100 question fs-1 ">
+        <div
+          class="question_text d-flex justify-content-center align-items-center"
+        >
+        <input type="hidden" name="question_id" value="{{question.id}}">
+        <h2>{{question.content}}</h2>
+        </div>
+        {%if question.question_type.name == 'MCQ' %}
+        <div class="choices">
+          {%for choice in choices(question.id)%}
+          {%if choice.correct%}
+          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
+          {%else%}
+          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
+          {%endif%}
+          {%endfor%}
+        </div>
+        {%elif question.question_type.name == 'TF'%}
+        <div class="choices">
+          {%for choice in choices(question.id)%}
+          {%if choice.correct == 1 %}
+          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
+          {%else%}
+          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
+          {%endif%}
+          {%endfor%}
+        </div>   
+        {%else%}
+        <div class="answer">
+          <input class="user_answer form-control p-2 fs-1" type="text" placeholder="Answer:.." required>
+          {%for choice in choices(question.id)%}
+          <button choice_id="{{choice.id}}" class="btn btn-primary p-5 fs-1">Answer</button>
+          {%endfor%}
+        </div>   
+        {%endif%}
+      </div>
+      {%endfor%}
+      {%else%}
+      <div class="blank w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+        <h1>No Questions Found</h1>
+        <a href="/">Go back</a>
+      </div>
+      {%endif%}
+
+      <div
+        class="done w-100 h-100   text-center d-flex flex-column justify-content-center align-items-center"
+      >
+        <h1>You Have Finished And Your Score Is : <span id="score"></span></h1>
+          <a href="/">Go Back</a>
+      </div>
+    </div>
+    <script src="{{url_for('static',filename='js/quiz.js')}}"></script>
+</div>
+{%endblock%}

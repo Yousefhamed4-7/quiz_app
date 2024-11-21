@@ -1,0 +1,5 @@
+{%extends 'layout.html'%} {%block title%}Question {%endblock%} {%block body%}
+<h1>{{question.text}}</h1>
+{%for choice in choices%}
+<button>{{choice.text}}</button>
+{%endfor%} {%endblock%}

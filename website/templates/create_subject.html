@@ -1,0 +1,10 @@
+{%extends 'layout.html'%} {%block title%}Create Subject {%endblock%} {%block
+body%}
+<div class="container mt-4">
+  <form action="/subject/create" method="post">
+    <label class="form-label" for="name">Subject Name:</label>
+    <input required class="form-control" type="text" name="name" id="name" />
+    <input type="submit" value="Create" class="btn btn-primary mt-2" />
+  </form>
+</div>
+{%endblock%}

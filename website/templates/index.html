@@ -1,0 +1,41 @@
+{%extends 'layout.html'%} {%block title%} Home Page {%endblock%} {%block css%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" />
+{%endblock%} {%block body%}
+
+<h1>Hello {{session["username"]}}</h1>
+<div class="container mt-3">
+  <div class="row g-3">
+    {%if subjects%} {%for subject in subjects%}
+    <div class="flip-card col-md-4">
+      <div class="card flip-card-inner">
+        <div
+          class="flip-card-front d-flex justify-content-center align-items-center"
+        >
+          <h1 class="card-title">{{subject.name}}</h1>
+        </div>
+        <div
+          class="flip-card-back d-flex justify-content-center align-items-center"
+        >
+          <h1>
+            <a
+              class="link-info face backside card-title"
+              href="{{  url_for('view.viewsubject', subject_name=subject.name)}}"
+            >
+              View Questions
+            </a>
+          </h1>
+        </div>
+      </div>
+    </div>
+    {%endfor%} {%else%}
+    <h3>No subjects Found <a href="/subject/create">create</a></h3>
+    {%endif%}
+  </div>
+</div>
+<script>
+  var cards = document.querySelectorAll(".flip-card");
+  cards.forEach((card) => {
+    card.style.height = `${card.scrollHeight + 120}px`;
+  });
+</script>
+{%endblock%}

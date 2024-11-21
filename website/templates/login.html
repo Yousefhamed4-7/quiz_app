@@ -1,0 +1,13 @@
+{%extends 'layout.html'%} {%block title%}Login{%endblock%} {%block body%}
+<h1 class="text-center mt-3">Log In</h1>
+<form class="container" action="/login" method="post">
+  <label class="form-label" for="email">Email:</label>
+  <input class="form-control" type="text" name="email" id="email" />
+  <label class="form-label" for="username">Username:</label>
+  <input class="form-control" type="text" name="username" id="username" />
+  <label class="form-label" for="password">Password:</label>
+  <input class="form-control" type="password" name="password" id="password" />
+  <input class="btn btn-primary mt-3" type="submit" value="Login" />
+</form>
+<a class="ms-5" href="/signup">Don't have an account?</a>
+{%endblock%}
