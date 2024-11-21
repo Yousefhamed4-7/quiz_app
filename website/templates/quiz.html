@@ -5,9 +5,14 @@
   {%for question in questions%}
       <div class="w-100 h-100 question fs-1 ">
         <div
-          class="question_text d-flex justify-content-center align-items-center"
+          class="question_text d-flex justify-content-center align-items-center flex-column"
         >
         <input type="hidden" name="question_id" value="{{question.id}}">
+        {%if question.img_path%}
+        <div class="w-25">
+          <img class="w-100" src="{{url_for('static',filename='images')}}/{{question.img_path}}" alt="An Image">
+        </div>
+        {%endif%}
         <h2>{{question.content}}</h2>
         </div>
         {%if question.question_type.name == 'MCQ' %}

@@ -92,8 +92,8 @@ class Database():
         db.session.add(subject1)
         db.session.commit()
     
-    def create_question(self,content,subject_name,question_type,user_id):
-        q1  = question(content=content,subject_id=self.get_subject(subject_name,user_id).id,question_type_id=self.get_question_type(question_type).id,user_id=user_id)
+    def create_question(self,content,subject_name,question_type,user_id,img_path = None):
+        q1  = question(content=content,subject_id=self.get_subject(subject_name,user_id).id,question_type_id=self.get_question_type(question_type).id,user_id=user_id,img_path=img_path)
         db.session.add(q1)
         db.session.commit()
         return q1

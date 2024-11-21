@@ -11,7 +11,7 @@ def iscorrect():
     choice  = db.get_choice(request.json.get("choice_id"))
     question = db.get_question(request.json.get("question_id"),session["user_id"])
     user_answer = request.json.get("user_answer")
-    if not user_answer:
+    if question.question_type.name != "SQ":
         if not choice or not question:
             return jsonify(
                 {
@@ -32,6 +32,9 @@ def iscorrect():
             "correct": 0
         })
     else:
+        print(user_answer)
+        print(choice.text)
+        print(user_answer == choice.text)
         if sorted(user_answer) == sorted(choice.text):
             question.Solved = 1
             db.update()

@@ -30,8 +30,9 @@ class question(db.Model):
     __tablename__ = "question"
 
     id:Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
-    content:Mapped[str] 
+    content:Mapped[str] = mapped_column(unique=True)
     Solved:Mapped[int] = mapped_column(default=0)
+    img_path: Mapped[str] = mapped_column(nullable=True)
     subject:Mapped["subject"] = relationship()
     subject_id:Mapped[int] = mapped_column(ForeignKey("subject.id"))
     question_type:Mapped["question_type"] = relationship()

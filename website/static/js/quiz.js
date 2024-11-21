@@ -15,7 +15,7 @@ function handel_questions(btn) {
   body: JSON.stringify({
     question_id: btn.parentElement.parentElement.querySelector("input[type='hidden']").value,
     choice_id: btn.getAttribute("choice_id"),
-    user_answer: btn.parentElement.parentElement.querySelector(".user_answer").value
+    user_answer: (btn.parentElement.parentElement.querySelector(".user_answer")) ? btn.parentElement.parentElement.querySelector(".user_answer").value: null
   }),
   headers: {
     "Content-type": "application/json",

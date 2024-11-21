@@ -1,13 +1,23 @@
 {%extends 'layout.html'%} {%block title%} {%endblock%} {%block body%}
 <div class="container text-center mt-2">
+  {%if question.img_path%}
+  <img
+    src="{{url_for('static',filename='images')}}\{{question.img_path}}"
+    alt="An Image"
+  />
+  {%endif%}
   <h1>{{question.content}}</h1>
   <ul class="list-unstyled d-flex flex-column">
-    {%for choice in choices%} {%if choice.correct == 1%}
+    {%if question.question_type.name != 'SQ'%} {%for choice in choices%} {%if
+    choice.correct == 1%}
     <li correct="1">{{choice.text}}</li>
     {%else%}
 
     <li>{{choice.text}}</li>
-    {%endif%} {%endfor%}
+    {%endif%} {%endfor%} {%else%} {%for choice in choices%} {%if choice.correct
+    == 1%}
+    <li correct="1" style="display: none">{{choice.text}}</li>
+    {%endif%} {%endfor%} {%endif%}
     <div class="answer text-success" style="overflow: hidden">
       <span></span>
     </div>

@@ -1,5 +1,6 @@
 from flask import Blueprint,render_template,url_for,redirect,request,flash,session
 from .utilities import database,loginrequired
+from pathlib import Path
 from random import choice
 
 db = database.Database()
@@ -37,6 +38,8 @@ def createquestion():
         questiontype = request.form.get("questiontype") 
         subject = request.form.get("subject")
         question = request.form.get("question")
+        file = request.files.get("image")
+        if file: file.save(Path.joinpath(Path(__file__).parent,"static\images",file.filename))
         if not questiontype:
             flash("Please Chose A Question type","warning")
             return redirect(url_for("view.createquestion"))
@@ -46,7 +49,7 @@ def createquestion():
         if not question:
             flash("Please Enter A Question","info")
             return redirect(url_for("view.createquestion"))
-        q1 = db.create_question(question,subject,questiontype,user_id=session["user_id"])
+        q1 = db.create_question(question,subject,questiontype,user_id=session["user_id"],img_path= file.filename if file else None)
         if questiontype == "MCQ":
             choice1 = request.form.get("choice1")
             choice2 = request.form.get("choice2")
