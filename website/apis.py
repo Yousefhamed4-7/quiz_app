@@ -35,7 +35,7 @@ def iscorrect():
         print(user_answer)
         print(choice.text)
         print(user_answer == choice.text)
-        if sorted(user_answer) == sorted(choice.text):
+        if sorted(user_answer.strip()) == sorted(choice.text):
             question.Solved = 1
             db.update()
             return jsonify(
