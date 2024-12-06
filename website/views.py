@@ -158,7 +158,15 @@ def quizme():
 
         elif subject != "all" and quiztype == "random":
             questions = list(db.subject_questions(subject,session["user_id"]))
-            questions = [choice(questions) for _ in range(10)] if len(questions) >=10 else questions
+            random_question = []
+            if len(questions) >= 10:
+                while len(random_question) != 10:
+                    q = choice(questions)
+                    if q not in random_question:
+                        random_question.append(q)
+                questions = random_question
+            else:
+                questions = questions
         
         elif subject != "all" and quiztype == "unsolved":
             questions = list(db.get_unsolved_question(subject,session["user_id"]))
@@ -168,5 +176,5 @@ def quizme():
         else:
             flash("Something Went Wrong Please Try Again","danger")
             return redirect(url_for("view.quizview"))
-        return render_template("quiz.html",questions=questions)
+        return render_template("quiz.html",questions=set(questions))
         
