@@ -32,10 +32,11 @@ def iscorrect():
             "correct": 0
         })
     else:
-        print(user_answer)
-        print(choice.text)
+        print(sorted(user_answer.strip().lower()))
+        print(sorted(choice.text.strip().lower()))
         print(user_answer == choice.text)
-        if sorted(user_answer.strip().lower()) == sorted(choice.text.lower()):
+        print(f"Actual {sorted(user_answer.strip().lower()) == sorted(choice.text.lower())}")
+        if sorted(user_answer.strip().lower()) == sorted(choice.text.strip().lower()):
             question.Solved = 1
             db.update()
             return jsonify(
