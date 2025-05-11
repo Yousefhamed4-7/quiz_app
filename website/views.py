@@ -216,7 +216,7 @@ def edit_question(question_id):
                 else:
                     db.create_choice(i,q1.id,0)
             flash("Updated Question","success")
-            return redirect(url_for("view.viewchoices", question_id=question_id))
+            return redirect(url_for("view.viewchoices", question_id=q1.id))
         elif questiontype== "TF":
             choice = request.form.get("radio")
             if not choice:
@@ -225,7 +225,7 @@ def edit_question(question_id):
             db.create_choice("True",q1.id,1 if choice == "True" else 0)
             db.create_choice("False",q1.id,1 if choice == "False" else 0)
             flash("Updated Question","success")
-            return redirect(url_for("view.viewchoices", question_id=question_id))
+            return redirect(url_for("view.viewchoices", question_id=q1.id))
         elif questiontype == "SQ":
             answer = request.form.get("answer")
             if not answer:
@@ -233,7 +233,7 @@ def edit_question(question_id):
                 return redirect(url_for("view.edit_question", question_id=question_id))
             db.create_choice(answer,q1.id,1)
             flash("Updated Question","success")
-            return redirect(url_for("view.viewchoices", question_id=question_id))
+            return redirect(url_for("view.viewchoices", question_id=q1.id))
         else:
             flash("Wrong Question type","danger")
             return redirect(url_for("view.edit_question", question_id=question_id))
