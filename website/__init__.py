@@ -23,7 +23,7 @@ def create_app():
     from .utilities import urlprefix,database 
     app.jinja_env.globals.update(geturl=urlprefix.geturl)
     app.jinja_env.globals.update(choices=database.Database.choice_questions_function)
-
+    app.jinja_env.globals.update(enumerate=enumerate)
 
     from .views import view
     from .auths import auth

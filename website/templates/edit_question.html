@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{%block title%}
+Edit Question
+{%endblock%}
+
+{% block body %}
+<h1 class="text-center mt-4">Edit Question</h1>
+<div class=" justify-content-center align-items-center">
+{%if question.img_path%}
+        <div class="w-25 m-auto">
+          <img class="w-100" src="{{url_for('static',filename='images')}}/{{question.img_path}}" alt="An Image">
+        </div>
+{%endif%}
+
+        <h2 class="text-center mb-3">{{question.content}}</h2>
+        {%if question.question_type.name == 'MCQ' %}
+        <div class="choices d-flex justify-content-center align-items-center gap-5">
+          {%for choice in choices(question.id)%}
+          {%if choice.correct%}
+          <button class="btn btn-outline-info text-success border border-success" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
+          {%else%}
+          <button class="btn btn-outline-info" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
+          {%endif%}
+          {%endfor%}
+        </div>
+        {%elif question.question_type.name == 'TF'%}
+        <div class="choices d-flex justify-content-center align-items-center gap-5">
+          {%for choice in choices(question.id)%}
+          {%if choice.correct == 1 %}
+          <button class="btn btn-outline-info border border-success text-success" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
+          {%else%}
+          <button class="btn btn-outline-info" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
+          {%endif%}
+          {%endfor%}
+        </div>   
+        {%else%}
+        <div class="d-flex flex-column justify-content-center align-items-center">
+        </div>   
+        {%endif%}
+</div>
+
+
+
+
+<form action="/question/edit/{{question.id}}" class="container" method="post" enctype="multipart/form-data">
+    <label class="form-label" for="question">question:</label>
+    <input class="form-control" type="text" name="question" id="question" value="{{question.content}}" />
+    <label class="form-label" for="img_path">Image Path: {{question.img_path}}</label>
+    <input type="hidden" name="old_path" value="{{question.img_path}}">
+    <input class="form-control" type="file" name="image" id="img_path" accept="image/*"  />
+
+<!--  -->
+{%if question.question_type.name == 'MCQ' %}
+
+
+<div class="MCQ">
+
+  </div>
+
+
+  {%for index,choice in enumerate(choices(question.id))%}
+  {%if choice.correct%}
+  <input
+  class="form-control mt-2 border border-success"
+  type="text"
+  name="choice{{index+1}}"
+  value="{{choice.text}}"
+    />
+  {%else%}
+  <input
+  class="form-control mt-2"
+  type="text"
+  name="choice{{index+1}}"
+  id="choices"
+  value="{{choice.text}}"
+    />  
+  {%endif%}
+  {%endfor%}
+
+  <label for="correct">Correct Answer: {{question.answer}} </label>
+
+  <select class="form-select" name="correct" id="correct">
+    <option value="choice1">Choice1</option>
+    <option value="choice2">Choice2</option>
+    <option value="choice3">Choice3</option>
+    <option value="choice4">Choice4</option>
+  </select>
+{%elif question.question_type.name == 'TF'%}
+<div class="d-flex justify-content-center align-items-center gap-5">
+  {%for choice in choices(question.id)%}
+  <label for="{{choice.text}}">{{choice.text}}</label>
+  {%if choice.correct == 1 %}
+      <input
+        class="form-switch"
+        type="radio"
+        value="{{choice.text}}"
+        checked
+        name="radio"
+        id="true"
+      />      
+      {%else%}
+      <input
+        class="form-switch"
+        type="radio"
+        value="{{choice.text}}"
+        name="radio"
+        id="true"
+        />
+  {%endif%}
+  {%endfor%}
+</div>
+
+{%else%}
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <label for="answer">Answer: </label>
+{%for choice in choices(question.id)%}
+    <input class="form-control" type="text" name="answer" value="{{choice.text}}" id="answer" />
+  {%endfor%}
+</div>   
+{%endif%}
+
+<!--  -->
+    <input type="hidden" name="questiontype" value="{{question.question_type.name}}">
+    <div class="d-flex justify-content-center align-items-center">
+        <input class="btn btn-primary  mt-3 px-4" type="submit" value="Edit" />
+    </div>
+</form>
+{% endblock %}

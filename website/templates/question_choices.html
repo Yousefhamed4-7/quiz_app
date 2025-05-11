@@ -24,10 +24,13 @@
     <button class="btn btn-primary">Show Answer</button>
   </ul>
 </div>
-<form action="/question/delete" method="post">
-  <input type="hidden" name="question_id" value="{{question.id}}" />
-  <input class="btn btn-outline-danger" type="submit" value="Delete" />
-</form>
+<div class="d-flex justify-content-evenly align-items-center">
+  <form action="/question/delete" method="post">
+    <input type="hidden" name="question_id" value="{{question.id}}" />
+    <input class="btn btn-outline-danger" type="submit" value="Delete" />
+  </form>
+  <a class="d-block btn btn-outline-info" href="/question/edit/{{question.id}}">Edit</a>
+</div>
 
 <script src="{{url_for('static',filename='js/question_choices.js')}}"></script>
 {%endblock%}
