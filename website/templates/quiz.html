@@ -29,9 +29,9 @@
         <div class="choices">
           {%for choice in choices(question.id)%}
           {%if choice.correct == 1 %}
-          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
+          <button class="btn btn-outline-info  fs-2" choice_id="{{choice.id}}" correct="true">{{choice.text}}</button>
           {%else%}
-          <button class="btn btn-outline-info text-black fs-2" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
+          <button class="btn btn-outline-info  fs-2" choice_id="{{choice.id}}" incorrect="true">{{choice.text}}</button>
           {%endif%}
           {%endfor%}
         </div>   
