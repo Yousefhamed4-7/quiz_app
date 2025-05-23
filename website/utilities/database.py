@@ -19,7 +19,7 @@ class Database():
         return db.session.execute(Select(question).filter_by(user_id=user_id,id=id)).scalar_one()
     
     def get_subjects(self,user_id):
-        return db.session.execute(Select(subject).filter_by(user_id=user_id)).scalars().all()
+        return db.session.execute(Select(subject).filter_by(user_id=user_id).order_by(subject.name.asc())).scalars().all()
 
     def get_question_type(self,name):
         return db.session.execute(Select(question_type).filter_by(name=name)).scalar()

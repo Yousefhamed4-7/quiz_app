@@ -85,7 +85,7 @@ def createquestion():
         else:
             flash("Wrong Question type","danger")
             return redirect(url_for("view.createquestion"))
-    return render_template("createquestion.html",subjects=reversed(db.get_subjects(session["user_id"])))
+    return render_template("createquestion.html",subjects=db.get_subjects(session["user_id"]))
 
 @view.route("/subject/create",methods=["POST","GET"])
 @loginrequired.login_required
