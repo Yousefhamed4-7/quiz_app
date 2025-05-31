@@ -9,7 +9,7 @@ function hideall() {
   sq.style.display = "none";
 }
 hideall();
-sq.style.display = "block";
+mcq.style.display = "block";
 
 select.onchange = () => {
   hideall();
