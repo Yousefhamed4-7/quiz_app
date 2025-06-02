@@ -11,7 +11,7 @@ body%}
     <label for="subject">Subject: </label>
     <select class="form-select" name="subject" id="subject">
       {%for subject in subjects%}
-      {% if subject.name == "English I'm Ashamed that this is even a thing but its tough times we live in"%}
+      {% if subject.name == "Economy"%}
       <option selected value="{{subject.name}}">{{subject.name}}</option>
       {%else%}
       <option value="{{subject.name}}">{{subject.name}}</option>
