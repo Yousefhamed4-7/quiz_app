@@ -41,7 +41,7 @@ class Database():
     
 
     def subject_questions(self,name,user_id):
-        return db.session.execute(Select(question).filter_by(subject_id=self.get_subject(name,user_id).id,user_id=user_id)).scalars().all()
+        return db.session.execute(Select(question).filter_by(subject_id=self.get_subject(name,user_id).id,user_id=user_id).order_by(question.content.desc())).scalars().all()
 
     def choice_questions(self,question_id):
         return db.session.execute(Select(choices).filter_by(question_id=question_id)).scalars().all()

@@ -18,7 +18,7 @@ def index():
 @view.route("/subjects/<subject_name>")
 @loginrequired.login_required
 def viewsubject(subject_name):
-    return render_template("subject_questions.html",questions=db.subject_questions(subject_name,user_id=session["user_id"]),subject_name=subject_name)
+    return render_template("subject_questions.html",questions=db.subject_questions(subject_name,user_id=session["user_id"]),subject=db.get_subject(subject_name,session["user_id"]),subject_name=subject_name)
 
 @view.route("/questions/<question_id>")
 @loginrequired.login_required
@@ -49,7 +49,11 @@ def createquestion():
         if not question:
             flash("Please Enter A Question","info")
             return redirect(url_for("view.createquestion"))
-        q1 = db.create_question(question,subject,questiontype,user_id=session["user_id"],img_path= file.filename if file else None)
+        try:
+            q1 = db.create_question(question,subject,questiontype,user_id=session["user_id"],img_path= file.filename if file else None)
+        except:
+            flash("This Question Already Exists","warning")
+            return redirect(url_for("view.createquestion"))
         if questiontype == "MCQ":
             choice1 = request.form.get("choice1")
             choice2 = request.form.get("choice2")
